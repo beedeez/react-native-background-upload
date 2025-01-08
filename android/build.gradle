@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        kotlinVersion = '1.6.20'
+        kotlinVersion = '1.6.0'
         buildToolsVersion = '29.0.2'
         compileSdkVersion = 29
         targetSdkVersion = 29
@@ -31,6 +31,8 @@ def safeExtGet(prop, fallback) {
 }
 
 android {
+    namespace "com.vydia.RNUploader"
+
     compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
     buildToolsVersion safeExtGet('buildToolsVersion', DEFAULT_BUILD_TOOLS_VERSION)
 
