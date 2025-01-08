@@ -10,8 +10,7 @@ import android.webkit.MimeTypeMap
 import com.facebook.react.BuildConfig
 import com.facebook.react.bridge.*
 import net.gotev.uploadservice.UploadService
-import net.gotev.uploadservice.UploadServiceConfig.httpStack
-import net.gotev.uploadservice.UploadServiceConfig.initialize
+import net.gotev.uploadservice.UploadServiceConfig
 import net.gotev.uploadservice.data.UploadNotificationConfig
 import net.gotev.uploadservice.data.UploadNotificationStatusConfig
 import net.gotev.uploadservice.observer.request.GlobalRequestObserver
@@ -26,6 +25,21 @@ class UploaderModule(val reactContext: ReactApplicationContext) : ReactContextBa
   private val TAG = "UploaderBridge"
   private var notificationChannelID = "BackgroundUploadChannel"
   private var isGlobalRequestObserver = false
+
+  init {
+    val application = reactContext.applicationContext as Application
+    val packageName = application.packageName
+
+    try {
+      UploadServiceConfig.initialize(
+        application,
+        packageName,
+        BuildConfig.DEBUG
+      )
+    } catch (e: Exception) {
+      Log.e(TAG, "Failed to initialize UploadServiceConfig: ${e.message}")
+    }
+  }
 
   override fun getName(): String {
     return "RNFileUploader"
@@ -172,8 +186,6 @@ class UploaderModule(val reactContext: ReactApplicationContext) : ReactContextBa
     }
 
     createNotificationChannel()
-
-    initialize(application, notificationChannelID, BuildConfig.DEBUG)
 
     if(!isGlobalRequestObserver) {
       isGlobalRequestObserver = true
