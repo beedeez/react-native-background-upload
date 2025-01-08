@@ -1,13 +1,25 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.vydia.RNUploader">
 
- <application>
-        <!-- Other stuff if needed -->
+    <application>
+        <!-- Make sure to explicitly set exported for net.gotev UploadService -->
+        <service
+            android:name="net.gotev.uploadservice.UploadService"
+            android:exported="false" />
 
+        <!-- Also override the broadcast receiver with exported set -->
+        <receiver
+            android:name="net.gotev.uploadservice.observer.request.NotificationActionsReceiver"
+            android:exported="false" />
+
+        <!-- Your existing ContentProvider for auto-initialization -->
         <provider
             android:name="com.vydia.RNUploader.UploadInitProvider"
             android:authorities="${applicationId}.rnuploadinitprovider"
             android:exported="false"
             android:multiprocess="false" />
     </application>
+
 </manifest>
