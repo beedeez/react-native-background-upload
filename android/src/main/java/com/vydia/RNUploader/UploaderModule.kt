@@ -10,6 +10,8 @@ import android.webkit.MimeTypeMap
 import com.facebook.react.BuildConfig
 import com.facebook.react.bridge.*
 import net.gotev.uploadservice.UploadService
+import net.gotev.uploadservice.UploadServiceConfig.httpStack
+import net.gotev.uploadservice.UploadServiceConfig.initialize
 import net.gotev.uploadservice.UploadServiceConfig
 import net.gotev.uploadservice.data.UploadNotificationConfig
 import net.gotev.uploadservice.data.UploadNotificationStatusConfig
