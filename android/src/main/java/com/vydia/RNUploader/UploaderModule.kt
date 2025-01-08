@@ -28,21 +28,6 @@ class UploaderModule(val reactContext: ReactApplicationContext) : ReactContextBa
   private var notificationChannelID = "BackgroundUploadChannel"
   private var isGlobalRequestObserver = false
 
-  init {
-    val application = reactContext.applicationContext as Application
-    val packageName = application.packageName
-
-    try {
-      UploadServiceConfig.initialize(
-        application,
-        packageName,
-        BuildConfig.DEBUG
-      )
-    } catch (e: Exception) {
-      Log.e(TAG, "Failed to initialize UploadServiceConfig: ${e.message}")
-    }
-  }
-
   override fun getName(): String {
     return "RNFileUploader"
   }
